@@ -52,6 +52,19 @@ app.get('/api/test', (req, res) => {
   });
 });
 
+// Serve static files from frontend build (for production)
+const frontendDistPath = path.resolve(__dirname, '../../frontend/dist');
+app.use(express.static(frontendDistPath));
+
+// Handle React Router - serve index.html for all non-API routes
+app.get('*', (req, res) => {
+  // Skip API routes
+  if (req.path.startsWith('/api') || req.path.startsWith('/socket.io')) {
+    return res.status(404).json({ error: 'API endpoint not found' });
+  }
+  res.sendFile(path.join(frontendDistPath, 'index.html'));
+});
+
 // Setup WebSocket handlers
 setupSocketHandlers(io);
 
