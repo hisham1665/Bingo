@@ -1,0 +1,10 @@
+{
+  "name": "bingo-app",
+  "version": "1.0.0",
+  "description": "Realtime Multiplayer Bingo Game",
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.4",
+    "dotenv": "^16.3.1"
+  }
+}
